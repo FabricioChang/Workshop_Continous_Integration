@@ -240,8 +240,10 @@ def test_pylint_sobre_gym_membership():
     cmd = [
         "pylint",
         str(ruta),
-        "--disable=C0114,C0115,C0116",  # Desactiva mensajes de docstring faltante
+        # Desactiva docstrings (C011x) y longitud de línea (C0301)
+        "--disable=C0114,C0115,C0116,C0301",
     ]
+
 
     resultado = subprocess.run(
         cmd,

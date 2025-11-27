@@ -15,7 +15,7 @@ Requisitos cubiertos:
 """
 
 from dataclasses import dataclass
-from typing import List, Dict, Tuple
+from typing import List, Dict
 
 
 # ------------------------ MODELO DE DATOS ------------------------ #
@@ -135,8 +135,7 @@ def calcular_costos(
     total_final = total_parcial - descuento_especial
 
     # Garantizar entero positivo
-    if total_final < 0:
-        total_final = 0
+    total_final = max(total_final, 0)
 
     return {
         "costo_base": costo_base,
@@ -228,7 +227,7 @@ def leer_codigos_caracteristicas(membresia: Membresia) -> List[str]:
     print("O ingresa '0' si no deseas agregar características.")
     entrada = input("Características: ").strip()
 
-    if entrada == "0" or entrada == "":
+    if entrada in ("0", ""):
         return []
 
     partes = [p.strip().upper() for p in entrada.split(",") if p.strip() != ""]
@@ -240,7 +239,6 @@ def leer_codigos_caracteristicas(membresia: Membresia) -> List[str]:
             codigos_validos.append(cod)
         else:
             print(f"⚠ Advertencia: '{cod}' no es una característica válida para este plan y será ignorada.")
-
     return codigos_validos
 
 
@@ -261,7 +259,7 @@ def ejecutar_cli() -> int:
         cod = input("\nIngresa el CÓDIGO de la membresía que deseas (por ejemplo BASIC): ").strip().upper()
         membresia = MEMBRESIAS.get(cod)
         if membresia is None:
-            print("❌ Membresía no válida. Intenta nuevamente.")
+            print("Membresía no válida. Intenta nuevamente.")
         else:
             break
 

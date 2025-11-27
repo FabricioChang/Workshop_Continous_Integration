@@ -147,7 +147,6 @@ def calcular_costos(
         "total": int(total_final),
     }
 
-
 def procesar_plan_membresia(
     codigo_membresia: str,
     numero_miembros: int,

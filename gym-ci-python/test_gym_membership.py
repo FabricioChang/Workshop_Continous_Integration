@@ -12,6 +12,7 @@ Requisitos verificados:
 - Revisión de estilo con pylint sobre gym_membership.py
 """
 
+import sys
 import subprocess
 from pathlib import Path
 
@@ -238,9 +239,10 @@ def test_pylint_sobre_gym_membership():
 
     # Puedes ajustar la lista de reglas deshabilitadas según lo que te pida el docente.
     cmd = [
+        sys.executable,
+        "-m",
         "pylint",
         str(ruta),
-        # Desactiva docstrings (C011x) y longitud de línea (C0301)
         "--disable=C0114,C0115,C0116,C0301",
     ]
 
